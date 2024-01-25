@@ -15,7 +15,7 @@ export default function SignUp() {
         const cookieStore = cookies();
         const supabase = createClient(cookieStore);
 
-        const { error } = await supabase.auth.signUp({
+        const signUpResult = await supabase.auth.signUp({
             email,
             password,
             options: {
@@ -26,7 +26,7 @@ export default function SignUp() {
             },
         });
 
-        if (error) {
+        if (signUpResult.error) {
             return redirect("/login?message=Could not authenticate user");
         }
 
